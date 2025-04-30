@@ -44,8 +44,7 @@ namespace PickyMoo
                 SourceRectangle = null,
                 Origin = Vector2.Zero
             };
-            crop.AddComponent(cropSpr);
-            _ecsManager.AddComponent(cropSpr);
+          
 
             var cropScale = new ScaleComponent
             {
@@ -107,7 +106,13 @@ namespace PickyMoo
             };
             mapEntity.AddComponent(tilemapComp);
             _ecsManager.AddComponent(tilemapComp);
+            var inv = new InventoryComponent { EntityId = player.Id };
+            player.AddComponent(inv);
+            _ecsManager.AddComponent(inv);
 
+            var belt = new ToolbeltComponent { EntityId = player.Id };
+            player.AddComponent(belt);
+            _ecsManager.AddComponent(belt);
             // --- Input & Camera tag for player ---
             var input = new InputComponent { EntityId = player.Id, Speed = 120f };
             player.AddComponent(input);
@@ -123,21 +128,31 @@ namespace PickyMoo
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            // pass ECSManager, Content and tile size to InteractionSystem
-            _ecsManager.AddSystem(new InteractionSystem(
-                _ecsManager,
-                Content,
-                tileWidth: 32,
-                tileHeight: 32
-            ));
-            _ecsManager.AddSystem(new GrowthSystem());
 
-
-            // register systems in correct order
-            _ecsManager.AddSystem(new TilemapSystem(_spriteBatch, _camera));
+            // Register your systems in this order:
             _ecsManager.AddSystem(new MovementSystem());
+            _ecsManager.AddSystem(new InteractionSystem(_ecsManager, Content, 32, 32));
+            _ecsManager.AddSystem(new WateringSystem(_ecsManager, 8f, 32, 32, 2));
+            _ecsManager.AddSystem(new GrowthSystem());
+            _ecsManager.AddSystem(new ToolSwitchSystem());
+            _ecsManager.AddSystem(new InventorySystem());
             _ecsManager.AddSystem(new CameraFollowSystem(_camera));
+            _ecsManager.AddSystem(new TilemapSystem(_spriteBatch, _camera));
             _ecsManager.AddSystem(new RenderingSystem(_spriteBatch, _camera));
+
+            // HUD *must* go last so it draws on top of everything
+            var hoeIcon = Content.Load<Texture2D>("hoe");
+            var waterIcon = Content.Load<Texture2D>("wateringCan");
+            var axeIcon = Content.Load<Texture2D>("axe");
+            var defaultFont = Content.Load<SpriteFont>("DefaultFont");
+            _ecsManager.AddSystem(new HUDSystem(
+                _spriteBatch,
+                defaultFont,
+                hoeIcon,
+                waterIcon,
+                axeIcon
+            ));
+
         }
 
         protected override void Update(GameTime gameTime)

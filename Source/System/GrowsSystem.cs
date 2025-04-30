@@ -1,5 +1,4 @@
-﻿// Source/System/GrowthSystem.cs
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using PickyMoo.ESC;
@@ -7,29 +6,35 @@ using PickyMoo.ESC;
 namespace PickyMoo.Source.System
 {
     /// <summary>
-    /// Advances any planted crops through their stages over time.
+    /// Crops only grow if they’ve been watered. Water dries over time.
     /// </summary>
     public class GrowthSystem : ISystem
     {
         public void Update(List<IComponent> comps, GameTime gameTime)
         {
-            var delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             var crops = comps.OfType<CropComponent>();
             var sprites = comps.OfType<SpriteComponent>();
+            var waters = comps.OfType<WaterComponent>();
+
+            // dry out water
+            foreach (var w in waters)
+                w.TimeRemaining -= delta;
 
             foreach (var c in crops)
             {
-                // accumulate time
-                c.TimeInCurrentStage += delta;
+                // skip if never watered or already dry
+                var w = waters.FirstOrDefault(x => x.EntityId == c.EntityId);
+                if (w == null || w.TimeRemaining <= 0f)
+                    continue;
 
-                // if time to grow…
+                // accumulate and grow
+                c.TimeInCurrentStage += delta;
                 if (c.CurrentStage < c.StageDurations.Length &&
                     c.TimeInCurrentStage >= c.StageDurations[c.CurrentStage])
                 {
                     c.TimeInCurrentStage = 0f;
                     c.CurrentStage++;
-
-                    // update sprite
                     if (c.CurrentStage < c.StageTextures.Count)
                     {
                         var spr = sprites.First(s => s.EntityId == c.EntityId);

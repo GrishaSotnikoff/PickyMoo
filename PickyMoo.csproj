@@ -11,6 +11,7 @@
     <PackageReference Include="MonoGame.Library.OpenAL" Version="1.23.1.11" />
     <PackageReference Include="MonoGame.Library.SDL" Version="2.32.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="SpriteFontPlus.MonoGame" Version="0.7.0.22" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,12 +19,48 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Content\axe.png" />
+    <None Remove="Content\cropStage0.png" />
+    <None Remove="Content\cropStage1.png" />
+    <None Remove="Content\cropStage2.png" />
+    <None Remove="Content\cropStage3.png" />
+    <None Remove="Content\cropStage4.png" />
+    <None Remove="Content\DefaultFont.mgcb" />
+    <None Remove="Content\Hoe.png" />
     <None Remove="Content\player.png" />
     <None Remove="Content\Tilesheet.png" />
     <None Remove="Content\Tut.png" />
+    <None Remove="Content\wateringCan.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Content\axe.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Hoe.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\wateringCan.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Content\cropStage0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\cropStage1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\cropStage2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\cropStage3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\cropStage4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Content\player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -33,5 +70,13 @@
     <EmbeddedResource Include="Content\Tut.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+
   </ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Content\DefaultFont.xnb">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>
