@@ -96,7 +96,7 @@ namespace PickyMoo.Source.System
                     _ecs.AddComponent(cSpr);
 
                     // Crop logic
-                    var durations = new float[] { 5f, 5f, 5f };
+                    var durations = new float[] { 5f, 5f, 5f, 5f };
                     var stages = new List<Texture2D> {
                         _content.Load<Texture2D>("cropStage0"),
                         _content.Load<Texture2D>("cropStage1"),

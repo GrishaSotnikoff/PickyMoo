@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PickyMoo.ESC;
 using PickyMoo.Source.System;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PickyMoo
 {
@@ -85,6 +86,9 @@ namespace PickyMoo
             };
             player.AddComponent(playerScale);
             _ecsManager.AddComponent(playerScale);
+            var menuComp = new MenuComponent { EntityId = player.Id };
+            player.AddComponent(menuComp);
+            _ecsManager.AddComponent(menuComp);
 
             // --- Dynamic fullscreen map ---
             int tileW = 32, tileH = 32;
@@ -151,6 +155,18 @@ namespace PickyMoo
                 hoeIcon,
                 waterIcon,
                 axeIcon
+            ));
+            var pixel = new Texture2D(GraphicsDevice, 1, 1);
+            pixel.SetData(new[] { Color.White });
+    
+            _ecsManager.AddSystem(new WetnessMeterSystem(
+                  _spriteBatch, _camera, pixel, 32, 32, 8f
+              ));
+            _ecsManager.AddSystem(new CraftingSystem());
+            _ecsManager.AddSystem(new SellingSystem());
+            // **new**: toggleable M‐menu
+            _ecsManager.AddSystem(new MenuSystem(
+                _spriteBatch, defaultFont, pixel, padding: 10
             ));
 
         }
