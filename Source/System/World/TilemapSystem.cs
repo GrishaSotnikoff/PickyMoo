@@ -3,8 +3,9 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PickyMoo.ESC;
+using PickyMoo.Source.System.Camera;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.World
 {
     public class TilemapSystem : ISystem
     {
@@ -33,8 +34,8 @@ namespace PickyMoo.Source.System
                     {
                         int id = map.Map[y, x];
                         // compute source rectangle in atlas
-                        int sx = (id % tilesPerRow) * map.TileWidth;
-                        int sy = (id / tilesPerRow) * map.TileHeight;
+                        int sx = id % tilesPerRow * map.TileWidth;
+                        int sy = id / tilesPerRow * map.TileHeight;
                         var src = new Rectangle(sx, sy, map.TileWidth, map.TileHeight);
 
                         // world position

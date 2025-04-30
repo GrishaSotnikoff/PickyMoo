@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.World
 {
     /// <summary>
     /// Holds a tile ID grid plus tileset info.

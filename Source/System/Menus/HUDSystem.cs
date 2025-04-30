@@ -4,8 +4,9 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PickyMoo.ESC;
+using PickyMoo.Source.System.Player;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Menus
 {
     public class HUDSystem : ISystem
     {

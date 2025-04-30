@@ -1,7 +1,7 @@
 ﻿using System;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.World
 {
     /// <summary>
     /// Tracks water status on crops: how long until they dry out.

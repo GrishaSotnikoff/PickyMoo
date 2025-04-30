@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PickyMoo.ESC;
-using PickyMoo.Source.System;
+using PickyMoo.Source.System.World;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Player
 {
     /// <summary>
     /// E = plant if you’re wielding the Hoe;  

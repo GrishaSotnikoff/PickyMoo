@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Player
 {
     public class ToolSwitchSystem : ISystem
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.World
 {
     /// <summary>
     /// Tracks a crop’s current stage, textures for each stage, and timings.

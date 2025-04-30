@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using PickyMoo.ESC;
+using PickyMoo.Source.System.Menus;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Player
 {
     public class SellingSystem : ISystem
     {

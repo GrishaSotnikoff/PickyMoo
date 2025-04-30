@@ -5,8 +5,9 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using PickyMoo.ESC;
+using PickyMoo.Source.System.Player;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.World
 {
     /// <summary>
     /// Waters all crops within a tile‐radius around the player.

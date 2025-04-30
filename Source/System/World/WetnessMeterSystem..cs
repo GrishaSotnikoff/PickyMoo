@@ -4,8 +4,9 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PickyMoo.ESC;
+using PickyMoo.Source.System.Camera;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.World
 {
     /// <summary>
     /// Draws a little water‐level bar above each watered crop.

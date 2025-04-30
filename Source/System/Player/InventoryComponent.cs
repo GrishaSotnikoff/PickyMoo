@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Player
 {
     public class InventoryComponent : IComponent
     {

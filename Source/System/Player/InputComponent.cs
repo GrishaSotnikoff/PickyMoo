@@ -1,7 +1,7 @@
 ﻿using System;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Player
 {
     /// <summary>
     /// Marks an entity as player‐controllable.

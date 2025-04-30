@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Camera
 {
     /// <summary>
     /// Moves the Camera2D.Position to match the entity with CameraComponent.

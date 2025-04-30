@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.World
 {
     /// <summary>
     /// Crops only grow if they’ve been watered. Water dries over time.

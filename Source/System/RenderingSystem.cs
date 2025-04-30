@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PickyMoo.ESC;
+using PickyMoo.Source.System.Camera;
 
 namespace PickyMoo.Source.System
 {

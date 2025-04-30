@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Camera
 {
     /// <summary>
     /// Simple 2D camera: tracks position, zoom, rotation.

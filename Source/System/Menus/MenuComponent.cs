@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Menus
 {
     /// <summary>
     /// Tracks state for a simple toggleable menu.

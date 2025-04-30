@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Menus
 {
     /// <summary>
     /// Toggles (M), navigates (↑↓), and draws a popup menu.
@@ -66,7 +66,7 @@ namespace PickyMoo.Source.System
                 // draw the popup
                 int w = 200;
                 int h = menu.Options.Count * (_font.LineSpacing + 5) + _pad * 2;
-                int x = (_pad * 2), y = (_pad * 2);
+                int x = _pad * 2, y = _pad * 2;
 
                 _batch.Begin();
                 // semi‐opaque background

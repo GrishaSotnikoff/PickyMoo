@@ -1,7 +1,7 @@
 ﻿using System;
 using PickyMoo.ESC;
 
-namespace PickyMoo.Source.System
+namespace PickyMoo.Source.System.Camera
 {
     /// <summary>
     /// Marks which entity the camera should follow.
