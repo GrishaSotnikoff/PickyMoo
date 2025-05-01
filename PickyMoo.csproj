@@ -29,7 +29,10 @@
     <None Remove="Content\Hoe.png" />
     <None Remove="Content\NPC.png" />
     <None Remove="Content\player.png" />
+    <None Remove="Content\shed.png" />
+    <None Remove="Content\shedGhost.png" />
     <None Remove="Content\Tilesheet.png" />
+    <None Remove="Content\tree.png" />
     <None Remove="Content\Tut.png" />
     <None Remove="Content\wateringCan.png" />
   </ItemGroup>
@@ -42,6 +45,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Content\NPC.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\shed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\shedGhost.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\tree.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Content\wateringCan.png">

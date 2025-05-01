@@ -35,6 +35,10 @@ namespace PickyMoo
             _ecsManager = new ECSManager();
             _camera = new Camera2D(GraphicsDevice.Viewport);
 
+
+
+
+            //-- locations -- 
             _locationManager = new LocationManager("Farm");
 
             string[,] farmMap = new string[20, 20];
@@ -57,8 +61,8 @@ namespace PickyMoo
                 {
                     EntityId = Guid.NewGuid(),
                     Tileset = tileset,
-                    TileSize = 32,
-                    TilesPerRow = 4,
+                    TileSize = 64,
+                    TilesPerRow = 64,
                     TileTypes = mapData
                 };
                 _ecsManager.AddComponent(terrain);
@@ -116,7 +120,13 @@ namespace PickyMoo
 
             // --- Player entity ---
             var player = new Entity();
-
+            var playerCol = new CollisionComponent
+            {
+                EntityId = player.Id,
+                LocalBounds = new Rectangle(-8, -8, 16, 16)  // e.g. 16×16 hitbox centered
+            };
+            player.AddComponent(playerCol);
+            _ecsManager.AddComponent(playerCol);
             var playerTx = new TransformComponent
             {
                 EntityId = player.Id,
@@ -125,6 +135,19 @@ namespace PickyMoo
                     GraphicsDevice.Viewport.Height * 0.5f
                 )
             };
+            var builder = new BuildModeComponent
+            {
+                EntityId = player.Id
+            };
+            var builderScale = new ScaleComponent
+            {
+                EntityId = builder.EntityId,
+                Scale = new Vector2(0.2f)
+            };
+            player.AddComponent(builderScale);
+            player.AddComponent(builder);
+            _ecsManager.AddComponent(builder);
+
             var questLog = new QuestLogComponent { EntityId = player.Id };
             player.AddComponent(questLog);
             _ecsManager.AddComponent(questLog);
@@ -250,6 +273,61 @@ namespace PickyMoo
             var camTag = new CameraComponent { EntityId = player.Id };
             player.AddComponent(camTag);
             _ecsManager.AddComponent(camTag);
+            const int mapWidth = 20, mapHeight = 20, tileSize = 32;
+            var rand = new Random();
+
+            // spawn 30 random trees
+            for (int i = 0; i < 30; i++)
+            {
+                // pick a random tile
+                int tx = rand.Next(0, mapWidth);
+                int ty = rand.Next(0, mapHeight);
+
+                // center in the tile
+                var pos = new Vector2(
+                    tx * tileSize + tileSize / 2f,
+                    ty * tileSize + tileSize / 2f
+                );
+
+                var tree = new Entity();
+
+                // position
+                var tComp = new TransformComponent
+                {
+                    EntityId = tree.Id,
+                    Position = pos
+                };
+                tree.AddComponent(tComp);
+                _ecsManager.AddComponent(tComp);
+
+                // sprite (assumes tree.png is ~32×64 with base at bottom)
+                var sComp = new SpriteComponent
+                {
+                    EntityId = tree.Id,
+                    Texture = Content.Load<Texture2D>("tree"),
+                    Origin = new Vector2(16, 64),
+                    SourceRectangle = null
+                };
+                tree.AddComponent(sComp);
+                _ecsManager.AddComponent(sComp);
+
+                // scale if your art is larger/smaller
+                var scComp = new ScaleComponent
+                {
+                    EntityId = tree.Id,
+                    Scale = new Vector2(0.15f)
+                };
+                tree.AddComponent(scComp);
+                _ecsManager.AddComponent(scComp);
+
+                // mark as tree
+                var treeComp = new TreeComponent
+                {
+                    EntityId = tree.Id
+                };
+                tree.AddComponent(treeComp);
+                _ecsManager.AddComponent(treeComp);
+            }
 
             base.Initialize();
         }
@@ -275,12 +353,19 @@ namespace PickyMoo
             _ecsManager.AddSystem(new QuestSystem());
 
             _fade = new ScreenFadeSystem(_spriteBatch, pixel, _locationManager);
+            _ecsManager.AddSystem(new BuildSystem(
+                _spriteBatch,
+                Content.Load<Texture2D>("shedGhost"),
+                Content.Load<Texture2D>("shed"),
+                _camera,
+                32
+            ));
 
             _ecsManager.AddSystem(new TerrainSystem(_spriteBatch, _camera, _locationManager));
             _ecsManager.AddSystem(new MapTransitionSystem(_locationManager, 20, 20, 32, _fade));
             _ecsManager.AddSystem(_fade);
             _ecsManager.AddSystem(new MinimapSystem(_spriteBatch, pixel, 20, 20, 32));
-
+            _ecsManager.AddSystem(new ChopSystem(_ecsManager));
             // HUD *must* go last so it draws on top of everything
             var hoeIcon = Content.Load<Texture2D>("hoe");
             var waterIcon = Content.Load<Texture2D>("wateringCan");
@@ -342,6 +427,14 @@ namespace PickyMoo
         {
             foreach (var sys in _systems)
                 sys.Update(_components, gameTime);
+        }
+        /// <summary>
+        /// Remove every component belonging to this entity ID.
+        /// The entity is effectively gone.
+        /// </summary>
+        public void RemoveEntity(Guid entityId)
+        {
+            _components.RemoveAll(c => c.EntityId == entityId);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace PickyMoo.Source.System
         public static string CurrentLocation { get; private set; }
         public Dictionary<string, TerrainComponent> Locations = new();
 
-        public LocationManager(string start)
+        public  LocationManager(string start)
         {
             CurrentLocation = start;
         }
